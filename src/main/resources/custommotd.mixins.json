@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "me.lukasabbe.custommotd.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MotdInvokerMixin",
+    "MotdSenderMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

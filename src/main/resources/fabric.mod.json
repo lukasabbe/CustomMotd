@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "custommotd",
+  "version": "${version}",
+  "name": "CustomMotd",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/custommotd/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "server": [
+      "me.lukasabbe.custommotd.Custommotd"
+    ]
+  },
+  "mixins": [
+    "custommotd.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
