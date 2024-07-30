@@ -1,5 +1,5 @@
-#Motd text (uses vannila system, use this tool https://mctools.org/motd-creator)
-First-line: A minecraft server
+#Motd text (uses vanilla system, use this tool https://mctools.org/motd-creator), You can also use the normal vannila color codes. They are located here (https://minecraft.wiki/w/Formatting_codes)
+motd: A minecraft server
 
 # From here remove # if you want to use a feature
 
@@ -16,12 +16,6 @@ First-line: A minecraft server
 #Hover text for player amount, max 6, (Only visual)
 #plyer-list:
   #- steve
-
-#Ping level graphics (0 = empty, 1=One bar, 2 = two bars, 3= tree bars, 4= four bars, 5= five bars, 6= six bars) (Only visual)
-#ping-level: 6
-
-#ping hover text, change the ms value (Only visual)
-#ms-level: 1337
 
 
 

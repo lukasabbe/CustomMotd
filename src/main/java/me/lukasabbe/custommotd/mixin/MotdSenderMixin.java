@@ -2,6 +2,7 @@ package me.lukasabbe.custommotd.mixin;
 
 import com.mojang.datafixers.DataFixer;
 import me.lukasabbe.custommotd.Custommotd;
+import me.lukasabbe.custommotd.util.MetaData;
 import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.SaveLoader;
@@ -32,7 +33,8 @@ public abstract class MotdSenderMixin {
 
     @Inject(method = "createMetadata", at=@At("HEAD"), cancellable = true)
     public void createMetaData(CallbackInfoReturnable<ServerMetadata> cir){
-        ServerMetadata _metadata = Custommotd.createServerData(motd, shouldEnforceSecureProfile());
+        ServerMetadata _metadata = MetaData.createServerData(motd, shouldEnforceSecureProfile());
         cir.setReturnValue(_metadata);
     }
+
 }

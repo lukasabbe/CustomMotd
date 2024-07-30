@@ -31,8 +31,8 @@ public class Config {
         Yaml yaml = new Yaml();
         try{
             Map<String, Object> configMap = yaml.load(new FileReader(configPath.toFile()));
-            if(configMap.containsKey("First-line")){
-                Motd = (String) configMap.get("First-line");
+            if(configMap.containsKey("motd")){
+                Motd = (String) configMap.get("motd");
             }
             if(configMap.containsKey("link-to-photo")){
                 linkToPhoto = (String) configMap.get("link-to-photo");
