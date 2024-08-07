@@ -8,11 +8,16 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.ServerMetadata;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
 public class Custommotd implements DedicatedServerModInitializer {
     public final static String MOD_ID = "custommotd";
     public static Config config;
     public static MinecraftServer server;
     public static ServerMetadata.Favicon configFavicon;
+
+    public static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);;
     @Override
     public void onInitializeServer() {
         config = new Config();
@@ -21,7 +26,6 @@ public class Custommotd implements DedicatedServerModInitializer {
             if(config.linkToPhoto != null)
               MetaData.setByteArrayFromLink(config.linkToPhoto);
         };
-        Thread thread = new Thread(r);
-        thread.start();
+        THREAD_POOL_EXECUTOR.submit(r);
     }
 }

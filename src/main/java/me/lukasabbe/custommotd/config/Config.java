@@ -24,7 +24,7 @@ public class Config {
     public Config(){
         loadConfig();
     }
-
+    @SuppressWarnings("unchecked")
     private void loadConfig() {
         Path configPath = FabricLoader.getInstance().getConfigDir().resolve("custom-motd-config.yml");
         if(!Files.exists(configPath))createConfig(configPath);

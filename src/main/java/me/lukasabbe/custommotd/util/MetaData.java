@@ -24,6 +24,11 @@ import static me.lukasabbe.custommotd.Custommotd.*;
 public class MetaData {
     public static ServerMetadata createServerData(@Nullable String motd, boolean b){
         String _motd = config.Motd;
+        Runnable r = () -> {
+            if(config.linkToPhoto != null)
+                MetaData.setByteArrayFromLink(config.linkToPhoto);
+        };
+        THREAD_POOL_EXECUTOR.submit(r);
         if(config.Motd == null)
             _motd = motd;
         else{

@@ -25,8 +25,7 @@ public class ReloadCommand {
             ServerMetadata metadata = ((MotdInvokerMixin)Custommotd.server).getServerMetaData();
             ((MotdInvokerMixin)Custommotd.server).setMetaData(metadata);
         };
-        Thread thread = new Thread(r);
-        thread.start();
+        Custommotd.THREAD_POOL_EXECUTOR.submit(r);
         serverCommandSourceCommandContext.getSource().sendFeedback(()->Text.literal("Reloded config"),true);
         return 0;
     }
