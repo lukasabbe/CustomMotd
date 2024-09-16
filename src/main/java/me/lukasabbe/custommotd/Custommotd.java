@@ -17,7 +17,8 @@ public class Custommotd implements DedicatedServerModInitializer {
     public static MinecraftServer server;
     public static ServerMetadata.Favicon configFavicon;
 
-    public static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);;
+    public static final ThreadPoolExecutor THREAD_POOL_EXECUTOR = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+
     @Override
     public void onInitializeServer() {
         config = new Config();
@@ -28,4 +29,5 @@ public class Custommotd implements DedicatedServerModInitializer {
         };
         THREAD_POOL_EXECUTOR.submit(r);
     }
+
 }
