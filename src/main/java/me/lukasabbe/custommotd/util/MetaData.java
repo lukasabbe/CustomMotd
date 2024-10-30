@@ -2,6 +2,7 @@ package me.lukasabbe.custommotd.util;
 
 import com.google.common.base.Preconditions;
 import com.mojang.authlib.GameProfile;
+import me.lukasabbe.custommotd.Custommotd;
 import me.lukasabbe.custommotd.mixin.MotdInvokerMixin;
 import net.minecraft.server.ServerMetadata;
 import net.minecraft.text.Text;
@@ -53,8 +54,13 @@ public class MetaData {
             }
         }
         List<GameProfile> parsedStrings = new ArrayList<>();
-        for (String p : playerStrings) {
-            parsedStrings.add(new GameProfile(UUID.randomUUID(), TextParser.formatText(p).getString()));
+        try{
+            for (String p : playerStrings) {
+                parsedStrings.add(new GameProfile(UUID.randomUUID(), TextParser.formatText(p).getString()));
+            }
+        }catch (ClassCastException exception){
+            LOGGER.error("Make sure to use \"\" around any alone number in the player-list. Like \"1\"");
+            parsedStrings.add(new GameProfile(UUID.randomUUID(), "Check erros"));
         }
         return Optional.of(new ServerMetadata.Players(maxPlayer, onlinePlayers, parsedStrings));
     }
