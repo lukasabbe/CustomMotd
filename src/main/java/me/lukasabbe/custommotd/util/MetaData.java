@@ -23,16 +23,16 @@ import static me.lukasabbe.custommotd.Custommotd.*;
 
 public class MetaData {
     public static ServerMetadata createServerData(@Nullable String motd, boolean b){
-        String _motd = config.Motd;
+        Text _motd = Text.of(config.Motd);
         Runnable r = () -> {
             if(config.linkToPhoto != null)
                 MetaData.setByteArrayFromLink(config.linkToPhoto);
         };
         THREAD_POOL_EXECUTOR.submit(r);
         if(config.Motd == null)
-            _motd = motd;
+            _motd = Text.of(motd);
         else{
-            _motd = TextParser.formatText(_motd);
+            _motd = TextParser.formatText(_motd.getString());
         }
         return new ServerMetadata(Text.of(_motd),getPlayerList(), Optional.of(ServerMetadata.Version.create()),getFavIcon(),b);
     }
@@ -54,7 +54,7 @@ public class MetaData {
         }
         List<GameProfile> parsedStrings = new ArrayList<>();
         for (String p : playerStrings) {
-            parsedStrings.add(new GameProfile(UUID.randomUUID(), TextParser.formatText(p)));
+            parsedStrings.add(new GameProfile(UUID.randomUUID(), TextParser.formatText(p).getString()));
         }
         return Optional.of(new ServerMetadata.Players(maxPlayer, onlinePlayers, parsedStrings));
     }
