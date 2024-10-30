@@ -9,6 +9,7 @@ The icon is now a link instead of locally. Why?, this is because you can now hav
 
 # Example
 ![Example](./images/2024-07-30_16.39.05.png)
+![Example 2](./images/2024-10-31_00.29.54.png)
 
 # Config
 ```
