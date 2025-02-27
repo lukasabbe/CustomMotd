@@ -2,10 +2,12 @@
   "schemaVersion": 1,
   "id": "custommotd",
   "version": "${version}",
-  "name": "CustomMotd",
-  "description": "",
-  "authors": [],
-  "contact": {},
+  "name": "Custom Motd",
+  "description": "Gives you many options to customize your servers appearance from the server menu.",
+  "authors": ["Lukasabbe"],
+  "contact": {
+    "sources": "https://github.com/lukasabbe/CustomMotd"
+  },
   "license": "MIT",
   "icon": "assets/custommotd/icon.png",
   "environment": "server",
