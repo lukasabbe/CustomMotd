@@ -2,7 +2,6 @@ package me.lukasabbe.custommotd.util;
 
 import com.google.common.base.Preconditions;
 import com.mojang.authlib.GameProfile;
-import me.lukasabbe.custommotd.Custommotd;
 import me.lukasabbe.custommotd.mixin.MotdInvokerMixin;
 import net.minecraft.server.ServerMetadata;
 import net.minecraft.text.Text;
@@ -24,16 +23,16 @@ import static me.lukasabbe.custommotd.Custommotd.*;
 
 public class MetaData {
     public static ServerMetadata createServerData(@Nullable String motd, boolean b){
-        Text _motd = Text.of(config.Motd);
+        String _motd = config.Motd;
         Runnable r = () -> {
             if(config.linkToPhoto != null)
                 MetaData.setByteArrayFromLink(config.linkToPhoto);
         };
         THREAD_POOL_EXECUTOR.submit(r);
         if(config.Motd == null)
-            _motd = Text.of(motd);
+            _motd = motd;
         else{
-            _motd = TextParser.formatText(_motd.getString());
+            _motd = TextParser.formatText(_motd);
         }
         return new ServerMetadata(Text.of(_motd),getPlayerList(), Optional.of(ServerMetadata.Version.create()),getFavIcon(),b);
     }
@@ -54,13 +53,8 @@ public class MetaData {
             }
         }
         List<GameProfile> parsedStrings = new ArrayList<>();
-        try{
-            for (String p : playerStrings) {
-                parsedStrings.add(new GameProfile(UUID.randomUUID(), TextParser.formatText(p).getString()));
-            }
-        }catch (ClassCastException exception){
-            LOGGER.error("Make sure to use \"\" around any alone number in the player-list. Like \"1\"");
-            parsedStrings.add(new GameProfile(UUID.randomUUID(), "Check erros"));
+        for (String p : playerStrings) {
+            parsedStrings.add(new GameProfile(UUID.randomUUID(), TextParser.formatText(p)));
         }
         return Optional.of(new ServerMetadata.Players(maxPlayer, onlinePlayers, parsedStrings));
     }
