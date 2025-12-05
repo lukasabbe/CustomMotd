@@ -7,8 +7,8 @@ import net.minecraft.resource.ResourcePackManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.SaveLoader;
 import net.minecraft.server.ServerMetadata;
-import net.minecraft.server.WorldGenerationProgressListenerFactory;
 import net.minecraft.util.ApiServices;
+import net.minecraft.world.chunk.ChunkLoadProgress;
 import net.minecraft.world.level.storage.LevelStorage;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,7 +27,7 @@ public abstract class MotdSenderMixin {
     @Shadow public abstract boolean shouldEnforceSecureProfile();
 
     @Inject(method = "<init>", at = @At("TAIL"))
-    private void slide(Thread serverThread, LevelStorage.Session session, ResourcePackManager dataPackManager, SaveLoader saveLoader, Proxy proxy, DataFixer dataFixer, ApiServices apiServices, WorldGenerationProgressListenerFactory worldGenerationProgressListenerFactory, CallbackInfo ci) {
+    private void slide(Thread serverThread, LevelStorage.Session session, ResourcePackManager dataPackManager, SaveLoader saveLoader, Proxy proxy, DataFixer dataFixer, ApiServices apiServices, ChunkLoadProgress chunkLoadProgress, CallbackInfo ci) {
         Custommotd.server = (MinecraftServer) (Object) this;
     }
 

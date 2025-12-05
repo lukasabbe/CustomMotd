@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.mojang.authlib.GameProfile;
 import me.lukasabbe.custommotd.Custommotd;
 import me.lukasabbe.custommotd.mixin.MotdInvokerMixin;
+import net.minecraft.server.PlayerConfigEntry;
 import net.minecraft.server.ServerMetadata;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.Nullable;
@@ -49,18 +50,19 @@ public class MetaData {
             maxPlayer = players.max();
         if (config.playerList == null) {
             playerStrings = new ArrayList<>();
-            for (GameProfile profile : players.sample()) {
-                playerStrings.add(profile.getName());
+            for (var profile : players.sample()) {
+                playerStrings.add(profile.name());
             }
         }
-        List<GameProfile> parsedStrings = new ArrayList<>();
+        List<PlayerConfigEntry> parsedStrings = new ArrayList<>();
         try{
             for (String p : playerStrings) {
-                parsedStrings.add(new GameProfile(UUID.randomUUID(), TextParser.formatText(p).getString()));
+                PlayerConfigEntry playerConfig = new PlayerConfigEntry(new GameProfile(UUID.randomUUID(), TextParser.formatText(p).getString()));
+                parsedStrings.add(playerConfig);
             }
         }catch (ClassCastException exception){
             LOGGER.error("Make sure to use \"\" around any alone number in the player-list. Like \"1\"");
-            parsedStrings.add(new GameProfile(UUID.randomUUID(), "Check erros"));
+            parsedStrings.add(new PlayerConfigEntry(new GameProfile(UUID.randomUUID(), "Check erros")));
         }
         return Optional.of(new ServerMetadata.Players(maxPlayer, onlinePlayers, parsedStrings));
     }
