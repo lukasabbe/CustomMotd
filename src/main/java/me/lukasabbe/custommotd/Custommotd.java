@@ -1,6 +1,5 @@
 package me.lukasabbe.custommotd;
 
-import me.lukasabbe.custommotd.commands.ReloadCommand;
 import me.lukasabbe.custommotd.config.Config;
 import me.lukasabbe.custommotd.util.MetaData;
 import net.fabricmc.api.DedicatedServerModInitializer;
@@ -25,7 +24,6 @@ public class Custommotd implements DedicatedServerModInitializer {
     @Override
     public void onInitializeServer() {
         config = new Config();
-        CommandRegistrationCallback.EVENT.register(ReloadCommand::registerCommand);
         Runnable r = () -> {
             if(config.linkToPhoto != null)
               MetaData.setByteArrayFromLink(config.linkToPhoto);
